@@ -1,0 +1,36 @@
+package cn.yanshu.action;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.sun.org.apache.xpath.internal.operations.Mod;
+
+import cn.yanshu.service.IReportService;
+
+@Controller
+@RequestMapping("/report")
+public class ReportAction {
+	@Resource
+   private IReportService  reportService;
+	
+	@RequestMapping("/getline")
+	public @ResponseBody Object  getline(){
+		return reportService.smtline_getline();
+	}
+	
+	@RequestMapping("/linetomo")
+	public  String  smtline_linetomo(String moname,String workcenterid,Model model){
+		model.addAttribute("moname", moname);
+		model.addAttribute("workcenterid", workcenterid);
+		return "/WEB-INF/report/smtline_mo.jsp";
+	}
+	
+	@RequestMapping("/smtline_mo")
+	public @ResponseBody Object  smtline_mo(String moname,String workcenterid){
+		return reportService.smtline_mo(moname, workcenterid);
+	}
+}

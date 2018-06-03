@@ -1,0 +1,36 @@
+package cn.yanshu.service.imp;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import cn.yanshu.reportdao.ReportMapper;
+import cn.yanshu.service.IReportService;
+
+@Service
+public class ReportServce implements IReportService{
+	@Autowired
+    private  ReportMapper  reportMapper;
+	@Override
+	public List<Map<String, Object>> smtline_getline() {
+		// TODO Auto-generated method stub
+		return reportMapper.smtline_getline();
+	}
+	@Override
+	public List<Map<String, Object>> smtline_mo(String moname,
+			String workcenterid) {
+		// TODO Auto-generated method stub
+		//传map到后台去
+		Map<String,Object>  map=new HashMap<String, Object>();
+		map.put("res", 0);
+		map.put("moname", moname);
+		map.put("workcenterid", workcenterid);
+		List<Map<String,Object>>  res=reportMapper.smtline_mo(map);
+		System.out.println(map.get("res"));
+		return res ;
+	}
+
+}

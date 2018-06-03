@@ -1,0 +1,80 @@
+package cn.yanshu.service.imp;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import cn.yanshu.reportdao.ReportMapper;
+import cn.yanshu.service.IReportService;
+import cn.yanshu.util.StringUtil;
+
+@Service
+public class ReportServce implements IReportService{
+	@Autowired
+    private  ReportMapper  reportMapper;
+	@Override
+	public List<Map<String, Object>> smtline_getline() {
+		// TODO Auto-generated method stub
+		return reportMapper.smtline_getline();
+	}
+	@Override
+	public Map<String, Object> smtline_mo(String moname,
+			String workcenterid) {
+		// TODO Auto-generated method stub
+		//传map到后台去
+		Map<String,Object>  paramap=new HashMap<String, Object>();
+		//map.put("res", 0);//类似输出参数自动赋值 只要==0 存储过程执行完毕  还有msg total等都可以
+		paramap.put("moname", moname);
+		paramap.put("workcenterid", workcenterid);
+		List<Map<String,Object>>  list=reportMapper.smtline_mo(paramap);
+		return StringUtil.listToDataJSON(list, paramap);
+	}
+	@Override
+	public Map<String, Object> smtline_mz(String moname, String workcenterid) {
+		// TODO Auto-generated method stub
+		Map<String,Object>  paramap=new HashMap<String, Object>();
+		paramap.put("moname", moname);
+		paramap.put("workcenterid", workcenterid);
+		List<Map<String,Object>>  list=reportMapper.smtline_mz(paramap);
+		return StringUtil.listToDataJSON(list, paramap);
+	}
+	
+	//组包车间看板 获取线体
+	@Override
+	public List<Map<String, Object>> zbsite_getworkcenter(String site) {
+		// TODO Auto-generated method stub
+		return reportMapper.zbsite_getworkcenter(site);
+	}
+	@Override
+	public Map<String, Object> zbsite_getresult(String site, String workcenter,
+			String adate, String bdate, String banci) {
+		// TODO Auto-generated method stub
+		Map<String,Object>  paramap=new HashMap<String, Object>();
+		paramap.put("site", site);
+		paramap.put("workcenter", workcenter);
+		paramap.put("adate", adate);
+		paramap.put("bdate", bdate);
+		paramap.put("banci", banci);
+		List<Map<String,Object>>  list=reportMapper.zbsite_getresult(paramap);
+		return StringUtil.listToDataJSON(list, paramap);
+	}
+	@Override
+	public Map<String, Object> smtopc_example(String moid, String moname,
+			String lotsn) {
+		// TODO Auto-generated method stub
+		Map<String,Object>  paramap=new HashMap<String, Object>();
+		paramap.put("res", 0);
+		paramap.put("msg", "");
+		
+		paramap.put("moid", moid);
+		paramap.put("moname", moname);
+		paramap.put("lotsn", lotsn);
+		
+		reportMapper.smtopc_example(paramap);
+		return paramap;
+	}
+
+}

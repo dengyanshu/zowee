@@ -1,0 +1,11 @@
+package cn.yanshu.service;
+
+import java.util.List;
+import java.util.Map;
+
+public interface IReportService {
+	public List<Map<String,Object>> smtline_getline();
+	
+	
+	public  List<Map<String ,Object>> smtline_mo(String moname,String workcenterid);
+}

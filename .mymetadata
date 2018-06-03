@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="zowee"
+  id="myeclipse.1491616420073"
+  context-root="/zowee"
+  j2ee-spec="6.0"
+  archive="zowee.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

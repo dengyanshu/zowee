@@ -1,0 +1,17 @@
+package cn.yanshu.util;
+
+import java.util.UUID;
+
+public class StringUtil {
+   
+	
+	private StringUtil(){};
+	
+	/**
+	 * 文件名转UUID
+	 * */
+	public static String filenameToUUID(String filename){
+		String filename_suffix=filename.substring(filename.lastIndexOf("."));
+		return UUID.randomUUID().toString().replace("-", "")+filename_suffix;
+	}
+}
